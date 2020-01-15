@@ -10,15 +10,9 @@ const connect = function() {
     conn.write("Name: AKN");
   })
 
-  // setInterval(() => {
-  //   conn.write("Move: up")}, 50
-  // )
-
   conn.on("close", function() {
     console.log("It's got a sharp tongue, this server!");
   })
-
-  // conn.listen(50541)
  
   // interpret incoming data as text
   conn.setEncoding("utf8");
