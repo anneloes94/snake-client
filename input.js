@@ -1,5 +1,6 @@
 // Stores the active TCP connection object.
 let connection;
+const readline = require("readline");
 
 const setupInput = function(conn) {
   connection = conn;
@@ -10,6 +11,11 @@ const setupInput = function(conn) {
   stdin.on("data", handleUserInput)
   return stdin;
 }
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
 const handleUserInput = function (key) {
   if (key === '\u0003') {
@@ -22,6 +28,11 @@ const handleUserInput = function (key) {
     setInterval(() => {connection.write("Move: right")}, 50)
   } else if (key === "s") {
     setInterval(() => {connection.write("Move: down")}, 50);
+  } else if (key === "i") { // i for text input
+    rl.question("Say: _____", (text) => {
+      console.log(text)
+    })
+    rl.close();
   }
 }
 
